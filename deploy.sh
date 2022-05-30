@@ -1,0 +1,1 @@
+docker run --mount type=bind,source="$(pwd)",target=/app -it packages.finitytech.com.au:8087/finity/ansible-ee-awx:test ansible-galaxy collection list
