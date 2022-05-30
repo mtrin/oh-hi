@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+Namespace: ata-namespace
+metadata:     # Deployment metadata
+  name: nginx-deployment  # Name of the deployment
+  labels:
+     app: nginx  # Declaring the deployments labels.
+spec:
+  replicas: 3  # Declaring the number of Pods required
+  selector:
+    matchLabels:
+      app: nginx # Pods will be launched if matches deployment Label.
+  template:
+    metadata:
+      labels:
+        app: nginx # Labels of the Pods.
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80

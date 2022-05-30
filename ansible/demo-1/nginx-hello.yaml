@@ -1,0 +1,51 @@
+---
+- name: go minikube
+  hosts: localhost
+  gather_facts: False
+
+  tasks:
+
+    - name: create a deployment 
+      k8s:
+        state: absent
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: nginx-hello
+            namespace: default
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: nginx-hello
+            template:
+              metadata:
+                labels:
+                  app: nginx-hello
+              spec:
+                containers:
+                - name: nginx-hello
+                  image: nginx:1.14.2
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                  - containerPort: 8181
+
+    - name: create a Service 
+      k8s:
+        state: absent
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: nginx-hello
+            namespace: default
+          spec:
+            type: LoadBalancer
+            ports:
+            - port: 8181
+              targetPort: 8181
+            selector:
+              app: nginx-hello
+
+
