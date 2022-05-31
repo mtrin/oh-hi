@@ -1,5 +1,5 @@
 ---
-- name: go minikube
+- name: deploy demo nginx
   hosts: localhost
   gather_facts: False
 
