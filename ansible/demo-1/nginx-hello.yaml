@@ -7,7 +7,7 @@
 
     - name: create a deployment 
       k8s:
-        state: absent
+        state: present
         definition:
           apiVersion: apps/v1
           kind: Deployment
