@@ -1,0 +1,17 @@
+---
+- name: testrm
+  hosts: localhost
+  gather_facts: False
+
+  tasks:
+
+    - name: AKS List Cluster User Credential
+      azure.azcollection.azure_rm_resource:
+        resource_group: "rg-aks-service-lower-01"
+        provider: ContainerService
+        resource_type: managedClusters
+        resource_name: "aksclusterlower01/listClusterUserCredential"
+        api_version: "2018-03-31"
+        method: POST
+      register: clusterUserCredential
+      changed_when: false
